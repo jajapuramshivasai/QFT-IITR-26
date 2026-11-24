@@ -1,4 +1,4 @@
-\---
+---
 title: QFT-Path-Integral-2026
 ---
 
@@ -6,13 +6,13 @@ These notes synthesize and expand the 59-page handwritten lecture sequence using
 
 ### Conventions (Peskin & Schroeder, pp. xix–xxi)
 
-- **Natural & Heaviside–Lorentz Units:** $\hbar = c = 1$, $\alpha = \frac{e^2}{4\pi} \approx \frac{1}{137}$, with $[L] = [T] = [E]^{-1} = [M]^{-1}$.
+- **Natural & Heaviside–Lorentz Units:** $`\hbar = c = 1`$, $`\alpha = \frac{e^2}{4\pi} \approx \frac{1}{137}`$, with $`[L] = [T] = [E]^{-1} = [M]^{-1}`$.
 
-- **Minkowski Metric:** Mostly-minus signature $g_{\mu\nu} = \text{diag}(+1, -1, -1, -1)$, so $p^2 = p^\mu p_\mu = E^2 - \lvert\mathbf{p}\rvert^2 = m^2$.
+- **Minkowski Metric:** Mostly-minus signature $`g_{\mu\nu} = \text{diag}(+1, -1, -1, -1)`$, so $`p^2 = p^\mu p_\mu = E^2 - \lvert\mathbf{p}\rvert^2 = m^2`$.
 
-- **Fourier Transforms:** $f(x) = \int \frac{d^4k}{(2\pi)^4} e^{-ik\cdot x} \tilde{f}(k)$ and $\tilde{f}(k) = \int d^4x \, e^{+ik\cdot x} f(x)$, with $\int d^4x \, e^{ik\cdot x} = (2\pi)^4\delta^{(4)}(k)$.
+- **Fourier Transforms:** $`f(x) = \int \frac{d^4k}{(2\pi)^4} e^{-ik\cdot x} \tilde{f}(k)`$ and $`\tilde{f}(k) = \int d^4x \, e^{+ik\cdot x} f(x)`$, with $`\int d^4x \, e^{ik\cdot x} = (2\pi)^4\delta^{(4)}(k)`$.
 
-- **Coupling Notation:** The handwritten notes denote the $\phi^4$ coupling by $g$, while P&S denote it by $\lambda$; both are cross-referenced below.
+- **Coupling Notation:** The handwritten notes denote the $`\phi^4`$ coupling by $`g`$, while P&S denote it by $`\lambda`$; both are cross-referenced below.
 
 ---
 
@@ -20,121 +20,151 @@ These notes synthesize and expand the 59-page handwritten lecture sequence using
 
 ### 1.1 Phase-Space and Configuration-Space Path Integrals
 
-For a quantum-mechanical system with Hamiltonian $H(q, p)$ and time-evolution operator $U(t_f, t_i) = e^{-iH(t_f - t_i)}$ ($\hbar = 1$), slice $T = t_f - t_i$ into $N+1$ steps of width $\epsilon = \frac{t_f - t_i}{N+1}$ with $q_0 = q_i$ and $q_{N+1} = q_f$. Inserting alternating position completeness relations $\int dq_k \lvert q_k\rangle\langle q_k\rvert = 1$ and momentum completeness relations $\int \frac{dp_k}{2\pi} \lvert p_k\rangle\langle p_k\rvert = 1$ (using $\langle q_k \vert p_k \rangle = e^{ip_k q_k}$) yields the **phase-space path integral** (P&S Eq. 9.13):
+For a quantum-mechanical system with Hamiltonian $`H(q, p)`$ and time-evolution operator $`U(t_f, t_i) = e^{-iH(t_f - t_i)}`$ ($`\hbar = 1`$), slice $`T = t_f - t_i`$ into $`N+1`$ steps of width $`\epsilon = \frac{t_f - t_i}{N+1}`$ with $`q_0 = q_i`$ and $`q_{N+1} = q_f`$. Inserting alternating position completeness relations $`\int dq_k \lvert q_k\rangle\langle q_k\rvert = 1`$ and momentum completeness relations $`\int \frac{dp_k}{2\pi} \lvert p_k\rangle\langle p_k\rvert = 1`$ (using $`\langle q_k \vert p_k \rangle = e^{ip_k q_k}`$) yields the **phase-space path integral** (P&S Eq. 9.13):
 
-$$\langle q_f \vert e^{-iH(t_f - t_i)} \vert q_i \rangle = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N} dq_k\right) \left(\prod_{k=0}^{N} \frac{dp_k}{2\pi}\right) \exp\left[i \sum_{k=0}^{N} \left(p_k(q_{k+1} - q_k) - \epsilon H\left(\frac{q_{k+1}+q_k}{2}, p_k\right)\right)\right]$$
+```math
+\langle q_f \vert e^{-iH(t_f - t_i)} \vert q_i \rangle = \lim_{N \to \infty} \int \left(\prod_{k=1}^{N} dq_k\right) \left(\prod_{k=0}^{N} \frac{dp_k}{2\pi}\right) \exp\left[i \sum_{k=0}^{N} \left(p_k(q_{k+1} - q_k) - \epsilon H\left(\frac{q_{k+1}+q_k}{2}, p_k\right)\right)\right]
+```
 
-When $H(q, p) = \frac{p^2}{2m} + V(q)$ is quadratic in momentum, each $p_k$ integral is a Fresnel/Gaussian integral evaluated via analytic continuation:
+When $`H(q, p) = \frac{p^2}{2m} + V(q)`$ is quadratic in momentum, each $`p_k`$ integral is a Fresnel/Gaussian integral evaluated via analytic continuation:
 
-$$\int_{-\infty}^{\infty} \frac{dp_k}{2\pi} \exp\left[-i\epsilon\frac{p_k^2}{2m} + i p_k(q_{k+1}-q_k)\right] = \sqrt{\frac{m}{2\pi i \epsilon}} \exp\left[i\epsilon \frac{m}{2}\left(\frac{q_{k+1}-q_k}{\epsilon}\right)^2\right]$$
+```math
+\int_{-\infty}^{\infty} \frac{dp_k}{2\pi} \exp\left[-i\epsilon\frac{p_k^2}{2m} + i p_k(q_{k+1}-q_k)\right] = \sqrt{\frac{m}{2\pi i \epsilon}} \exp\left[i\epsilon \frac{m}{2}\left(\frac{q_{k+1}-q_k}{\epsilon}\right)^2\right]
+```
 
-Taking $N \to \infty$ produces the **configuration-space path integral**:
+Taking $`N \to \infty`$ produces the **configuration-space path integral**:
 
-$$\langle q_f \vert e^{-iHT} \vert q_i \rangle = \int \mathcal{D}q(t) \, \exp\left(i \int_{t_i}^{t_f} dt \, L(q, \dot{q})\right), \qquad \mathcal{D}q(t) \equiv \lim_{N \to \infty} \left(\frac{m}{2\pi i \epsilon}\right)^{(N+1)/2} \prod_{k=1}^{N} dq_k$$
+```math
+\langle q_f \vert e^{-iHT} \vert q_i \rangle = \int \mathcal{D}q(t) \, \exp\left(i \int_{t_i}^{t_f} dt \, L(q, \dot{q})\right), \qquad \mathcal{D}q(t) \equiv \lim_{N \to \infty} \left(\frac{m}{2\pi i \epsilon}\right)^{(N+1)/2} \prod_{k=1}^{N} dq_k
+```
 
-### 1.2 Vacuum Projection ($i\epsilon$ Prescription) & Wick Rotation (P&S §4.2, §9.2–9.3)
+### 1.2 Vacuum Projection ($`i\epsilon`$ Prescription) & Wick Rotation (P&S §4.2, §9.2–9.3)
 
-To extract vacuum expectation values $\langle \Omega \vert T\lbrace q(t_1)\cdots q(t_n)\rbrace \vert \Omega \rangle$ in the interacting ground state $\lvert\Omega\rangle$ (with energy $E_0 = \langle \Omega \vert H \vert \Omega \rangle$), insert complete sets of energy eigenstates $H\lvert n\rangle = E_n\lvert n\rangle$ at $t = \pm T$:
+To extract vacuum expectation values $`\langle \Omega \vert T\{q(t_1)\cdots q(t_n)\} \vert \Omega \rangle`$ in the interacting ground state $`\lvert\Omega\rangle`$ (with energy $`E_0 = \langle \Omega \vert H \vert \Omega \rangle`$), insert complete sets of energy eigenstates $`H\lvert n\rangle = E_n\lvert n\rangle`$ at $`t = \pm T`$:
 
-$$\langle q_f \vert e^{-iH(2T)} \vert q_i \rangle = \sum_n \langle q_f \vert n \rangle \langle n \vert q_i \rangle e^{-2i E_n T}$$
+```math
+\langle q_f \vert e^{-iH(2T)} \vert q_i \rangle = \sum_n \langle q_f \vert n \rangle \langle n \vert q_i \rangle e^{-2i E_n T}
+```
 
-Rotating time slightly into the lower-right complex quadrant via $T \to \infty(1 - i\epsilon)$ suppresses all excited states ($E_n > E_0$) exponentially relative to $\lvert\Omega\rangle$ (assuming $\langle \Omega \vert 0 \rangle \neq 0$):
+Rotating time slightly into the lower-right complex quadrant via $`T \to \infty(1 - i\epsilon)`$ suppresses all excited states ($`E_n > E_0`$) exponentially relative to $`\lvert\Omega\rangle`$ (assuming $`\langle \Omega \vert 0 \rangle \neq 0`$):
 
-$$e^{-iHT} \lvert 0\rangle = e^{-iE_0 T}\lvert\Omega\rangle\langle\Omega\vert 0\rangle + \sum_{n \neq 0} e^{-iE_n T}\lvert n\rangle\langle n\vert 0\rangle \xrightarrow{T \to \infty(1 - i\epsilon)} e^{-iE_0 T}\lvert\Omega\rangle\langle\Omega\vert 0\rangle$$
+```math
+e^{-iHT} \lvert 0\rangle = e^{-iE_0 T}\lvert\Omega\rangle\langle\Omega\vert 0\rangle + \sum_{n \neq 0} e^{-iE_n T}\lvert n\rangle\langle n\vert 0\rangle \xrightarrow{T \to \infty(1 - i\epsilon)} e^{-iE_0 T}\lvert\Omega\rangle\langle\Omega\vert 0\rangle
+```
 
-> **Correction (Damping Term Sign on Note Page 2):** The handwritten notes write $+i\epsilon$ as a damping term. Inside the action $i\int dt (L + Jq + \frac{i\epsilon}{2}q^2)$, this produces $i(i\frac{\epsilon}{2}q^2) = -\frac{\epsilon}{2}q^2$, which is the correct damping factor. In P&S's convention, this damping is equivalently written in the kinetic operator as $-(\Box + m^2 - i\epsilon)$ (or via Euclidean Wick rotation $t = -i\tau$, $S_E = \int d\tau [\frac{1}{2}(\partial_\tau q)^2 + V(q)]$, turning $e^{iS} \to e^{-S_E}$ and mapping QFT directly onto classical statistical mechanics at inverse temperature $\beta = T_E$, P&S §9.3).
+> **Correction (Damping Term Sign on Note Page 2):** The handwritten notes write $`+i\epsilon`$ as a damping term. Inside the action $`i\int dt (L + Jq + \frac{i\epsilon}{2}q^2)`$, this produces $`i(i\frac{\epsilon}{2}q^2) = -\frac{\epsilon}{2}q^2`$, which is the correct damping factor. In P&S's convention, this damping is equivalently written in the kinetic operator as $`-(\Box + m^2 - i\epsilon)`$ (or via Euclidean Wick rotation $`t = -i\tau`$, $`S_E = \int d\tau [\frac{1}{2}(\partial_\tau q)^2 + V(q)]`$, turning $`e^{iS} \to e^{-S_E}`$ and mapping QFT directly onto classical statistical mechanics at inverse temperature $`\beta = T_E`$, P&S §9.3).
 
-### 1.3 Generating Functional $Z[J]$ & Functional Derivatives (P&S §9.2)
+### 1.3 Generating Functional $`Z[J]`$ & Functional Derivatives (P&S §9.2)
 
-Introducing a classical source $J(x)$ defines the generating functional:
+Introducing a classical source $`J(x)`$ defines the generating functional:
 
-$$Z[J] \equiv \int \mathcal{D}\phi \, \exp\left[i \int d^4x \, \left(\mathcal{L}(\phi, \partial_\mu\phi) + J(x)\phi(x)\right)\right]$$
+```math
+Z[J] \equiv \int \mathcal{D}\phi \, \exp\left[i \int d^4x \, \left(\mathcal{L}(\phi, \partial_\mu\phi) + J(x)\phi(x)\right)\right]
+```
 
-Using the fundamental functional derivative identity $\frac{\delta J(x)}{\delta J(y)} = \delta^{(4)}(x - y)$, time-ordered $n$-point correlation functions in the interacting vacuum $\lvert\Omega\rangle$ are generated by:
+Using the fundamental functional derivative identity $`\frac{\delta J(x)}{\delta J(y)} = \delta^{(4)}(x - y)`$, time-ordered $`n`$-point correlation functions in the interacting vacuum $`\lvert\Omega\rangle`$ are generated by:
 
-$$\langle \Omega \vert T\lbrace\phi(x_1)\cdots \phi(x_n)\rbrace \vert \Omega \rangle = (-i)^n \left. \frac{1}{Z[0]} \frac{\delta^n Z[J]}{\delta J(x_1)\cdots \delta J(x_n)} \right\rvert_{J=0}$$
+```math
+\langle \Omega \vert T\{\phi(x_1)\cdots \phi(x_n)\} \vert \Omega \rangle = (-i)^n \left. \frac{1}{Z[0]} \frac{\delta^n Z[J]}{\delta J(x_1)\cdots \delta J(x_n)} \right\rvert_{J=0}
+```
 
 ---
 
 ## 2. Free Real Scalar Field, Propagators & Wick's Theorem (P&S §2.4, §4.3, §9.2)
 
-### 2.1 Completing the Square for $Z_0[J]$ (P&S §9.2)
+### 2.1 Completing the Square for $`Z_0[J]`$ (P&S §9.2)
 
-For the free Klein–Gordon Lagrangian $\mathcal{L}_0 = \frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2$, integrating by parts gives:
+For the free Klein–Gordon Lagrangian $`\mathcal{L}_0 = \frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2`$, integrating by parts gives:
 
-$$Z_0[J] = \int \mathcal{D}\phi \, \exp\left[i \int d^4x \left(-\frac{1}{2}\phi(x)(\Box + m^2 - i\epsilon)\phi(x) + J(x)\phi(x)\right)\right]$$
+```math
+Z_0[J] = \int \mathcal{D}\phi \, \exp\left[i \int d^4x \left(-\frac{1}{2}\phi(x)(\Box + m^2 - i\epsilon)\phi(x) + J(x)\phi(x)\right)\right]
+```
 
-> **Correction (Sign Errors on Note Pages 4 & 6):** The notes intermittently write $(\Box - m^2)\phi_0 = J$ and $(\Box + m^2 + i\epsilon)\Delta_F = -\delta^{(4)}(x)$. In P&S's $(+,-,-,-)$ metric, $\partial_\mu\phi\partial^\mu\phi \xrightarrow{\text{IBP}} -\phi\Box\phi$, so the differential operator is **$-(\Box + m^2 - i\epsilon)$**.
+> **Correction (Sign Errors on Note Pages 4 & 6):** The notes intermittently write $`(\Box - m^2)\phi_0 = J`$ and $`(\Box + m^2 + i\epsilon)\Delta_F = -\delta^{(4)}(x)`$. In P&S's $`(+,-,-,-)`$ metric, $`\partial_\mu\phi\partial^\mu\phi \xrightarrow{\text{IBP}} -\phi\Box\phi`$, so the differential operator is **$'-(\Box + m^2 - i\epsilon)'$** — wait: **$`-(\Box + m^2 - i\epsilon)`$**.
 
-Shift the field $\phi(x) = \phi'(x) + \phi_0(x)$ ($\mathcal{D}\phi = \mathcal{D}\phi'$), where $\phi_0(x) = -\int d^4y \, D_F(x - y)J(y)$ solves $(\Box + m^2 - i\epsilon)\phi_0(x) = J(x)$, and the **Feynman propagator** satisfies $(\Box_x + m^2 - i\epsilon)D_F(x - y) = -i\delta^{(4)}(x - y)$ (in P&S's normalization, $D_F^{\text{P&S}}(x-y) = i\Delta_F^{\text{notes}}(x-y) = \langle 0 \vert T\phi(x)\phi(y) \vert 0 \rangle$):
+Shift the field $`\phi(x) = \phi'(x) + \phi_0(x)`$ ($`\mathcal{D}\phi = \mathcal{D}\phi'`$), where $`\phi_0(x) = -\int d^4y \, D_F(x - y)J(y)`$ solves $`(\Box + m^2 - i\epsilon)\phi_0(x) = J(x)`$, and the **Feynman propagator** satisfies $`(\Box_x + m^2 - i\epsilon)D_F(x - y) = -i\delta^{(4)}(x - y)`$ (in P&S's normalization, $`D_F^{\text{P\&S}}(x-y) = i\Delta_F^{\text{notes}}(x-y) = \langle 0 \vert T\phi(x)\phi(y) \vert 0 \rangle`$):
 
-$$Z_0[J] = Z_0[0] \exp\left[-\frac{1}{2} \int d^4x \, d^4y \, J(x) D_F^{\text{P&S}}(x - y) J(y)\right] = Z_0[0] \exp\left[-\frac{i}{2} \int d^4x \, d^4y \, J(x) \Delta_F(x - y) J(y)\right]$$
+```math
+Z_0[J] = Z_0[0] \exp\left[-\frac{1}{2} \int d^4x \, d^4y \, J(x) D_F^{\text{P\&S}}(x - y) J(y)\right] = Z_0[0] \exp\left[-\frac{i}{2} \int d^4x \, d^4y \, J(x) \Delta_F(x - y) J(y)\right]
+```
 
-where $Z_0[0] \equiv N = \left[\det(\Box + m^2 - i\epsilon)\right]^{-1/2}$.
+where $`Z_0[0] \equiv N = \left[\det(\Box + m^2 - i\epsilon)\right]^{-1/2}`$.
 
 ### 2.2 Green's Function Contour Prescriptions & Causality (P&S §2.4)
 
-In momentum space, $D_F^{\text{P&S}}(x - y) = \int \frac{d^4p}{(2\pi)^4} \frac{i}{p^2 - m^2 + i\epsilon} e^{-ip\cdot(x - y)}$, with poles at $p^0 = \pm(E_{\mathbf{p}} - i\epsilon)$ where $E_{\mathbf{p}} = \sqrt{\lvert\mathbf{p}\rvert^2 + m^2}$:
+In momentum space, $`D_F^{\text{P\&S}}(x - y) = \int \frac{d^4p}{(2\pi)^4} \frac{i}{p^2 - m^2 + i\epsilon} e^{-ip\cdot(x - y)}`$, with poles at $`p^0 = \pm(E_{\mathbf{p}} - i\epsilon)`$ where $`E_{\mathbf{p}} = \sqrt{\lvert\mathbf{p}\rvert^2 + m^2}`$:
 
-- **Feynman Propagator ($D_F$):** Poles shifted to $p^0 = +(E_{\mathbf{p}} - i\epsilon)$ (lower half-plane) and $p^0 = -(E_{\mathbf{p}} - i\epsilon)$ (upper half-plane), giving $D_F^{\text{P&S}}(x - y) = \theta(x^0 - y^0)D(x - y) + \theta(y^0 - x^0)D(y - x) = \langle 0 \vert T\phi(x)\phi(y) \vert 0 \rangle$, where $D(x - y) = \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_{\mathbf{p}}}e^{-ip\cdot(x-y)}$.
+- **Feynman Propagator ($`D_F`$):** Poles shifted to $`p^0 = +(E_{\mathbf{p}} - i\epsilon)`$ (lower half-plane) and $`p^0 = -(E_{\mathbf{p}} - i\epsilon)`$ (upper half-plane), giving $`D_F^{\text{P\&S}}(x - y) = \theta(x^0 - y^0)D(x - y) + \theta(y^0 - x^0)D(y - x) = \langle 0 \vert T\phi(x)\phi(y) \vert 0 \rangle`$, where $`D(x - y) = \int \frac{d^3p}{(2\pi)^3}\frac{1}{2E_{\mathbf{p}}}e^{-ip\cdot(x-y)}`$.
 
-- **Retarded & Advanced Propagators ($D_R, D_A$):** Both poles shifted below the real axis ($p^0 \to p^0 + i\epsilon$) gives $D_R(x - y) = \theta(x^0 - y^0)\langle 0 \vert [\phi(x), \phi(y)] \vert 0 \rangle$; both shifted above gives $D_A(x - y)$.
+- **Retarded & Advanced Propagators ($`D_R, D_A`$):** Both poles shifted below the real axis ($`p^0 \to p^0 + i\epsilon`$) gives $`D_R(x - y) = \theta(x^0 - y^0)\langle 0 \vert [\phi(x), \phi(y)] \vert 0 \rangle`$; both shifted above gives $`D_A(x - y)`$.
 
-- **Microcausality (P&S Eq. 2.53):** Across a spacelike interval $(x - y)^2 < 0$, $D(x - y) \sim e^{-m\lvert\mathbf{x}-\mathbf{y}\rvert} \neq 0$, yet a continuous Lorentz transformation maps $(x - y) \to -(x - y)$, so $[\phi(x), \phi(y)] = D(x - y) - D(y - x) = 0$. For a complex scalar field, particle propagation from $y \to x$ exactly cancels antiparticle propagation from $x \to y$ outside the light-cone.
+- **Microcausality (P&S Eq. 2.53):** Across a spacelike interval $`(x - y)^2 < 0`$, $`D(x - y) \sim e^{-m\lvert\mathbf{x}-\mathbf{y}\rvert} \neq 0`$, yet a continuous Lorentz transformation maps $`(x - y) \to -(x - y)`$, so $`[\phi(x), \phi(y)] = D(x - y) - D(y - x) = 0`$. For a complex scalar field, particle propagation from $`y \to x`$ exactly cancels antiparticle propagation from $`x \to y`$ outside the light-cone.
 
 ### 2.3 Wick's Theorem: Operator Induction vs. Functional Derivation (P&S §4.3, §9.2)
 
-Decomposing $\phi_I(x) = \phi_I^+(x) + \phi_I^-(x)$ into positive-frequency (annihilation, $\phi_I^+\lvert 0\rangle = 0$) and negative-frequency (creation, $\langle 0\rvert\phi_I^- = 0$) parts, the **contraction** of two fields is:
+Decomposing $`\phi_I(x) = \phi_I^+(x) + \phi_I^-(x)`$ into positive-frequency (annihilation, $`\phi_I^+\lvert 0\rangle = 0`$) and negative-frequency (creation, $`\langle 0\rvert\phi_I^- = 0`$) parts, the **contraction** of two fields is:
 
-$$\overline{\phi(x)\phi(y)} \equiv \begin{cases} [\phi^+(x), \phi^-(y)] & \text{for } x^0 > y^0 \\\\ [\phi^+(y), \phi^-(x)] & \text{for } y^0 > x^0 \end{cases} = D_F^{\text{P&S}}(x - y)$$
+```math
+\overline{\phi(x)\phi(y)} \equiv \begin{cases} [\phi^+(x), \phi^-(y)] & \text{for } x^0 > y^0 \\ [\phi^+(y), \phi^-(x)] & \text{for } y^0 > x^0 \end{cases} = D_F^{\text{P\&S}}(x - y)
+```
 
-**Wick's Theorem** (proved by induction on $m$ by commuting $\phi_1^+$ past normal-ordered strings $N(\phi_2\cdots\phi_m)$, P&S §4.3) states:
+**Wick's Theorem** (proved by induction on $`m`$ by commuting $`\phi_1^+`$ past normal-ordered strings $`N(\phi_2\cdots\phi_m)`$, P&S §4.3) states:
 
-$$T\lbrace\phi(x_1)\phi(x_2)\cdots\phi(x_m)\rbrace = N\big\lbrace\phi(x_1)\phi(x_2)\cdots\phi(x_m) + \text{all possible contractions}\big\rbrace$$
+```math
+T\{\phi(x_1)\phi(x_2)\cdots\phi(x_m)\} = N\big\{\phi(x_1)\phi(x_2)\cdots\phi(x_m) + \text{all possible contractions}\big\}
+```
 
-In the path integral formalism (P&S §9.2), Wick's theorem is immediate: expanding $Z_0[J]/Z_0[0]$ in powers of $J$ and differentiating $2k$ times pairs every $\frac{\delta}{\delta J(x_a)}$ with a $\frac{\delta}{\delta J(x_b)}$, directly yielding the $(2k-1)!!$ full contractions (e.g., 3 terms for the 4-point function).
+In the path integral formalism (P&S §9.2), Wick's theorem is immediate: expanding $`Z_0[J]/Z_0[0]`$ in powers of $`J`$ and differentiating $`2k`$ times pairs every $`\frac{\delta}{\delta J(x_a)}`$ with a $`\frac{\delta}{\delta J(x_b)}`$, directly yielding the $`(2k-1)!!`$ full contractions (e.g., 3 terms for the 4-point function).
 
 ---
 
-## 3. Interacting $\phi^4$ Theory, Symmetry Factors & Vacuum Energy (P&S §4.1, §4.4, §9.2)
+## 3. Interacting $`\phi^4`$ Theory, Symmetry Factors & Vacuum Energy (P&S §4.1, §4.4, §9.2)
 
 ### 3.1 Master Perturbative Series & Symmetry Factor Rules (P&S §4.4, §9.2)
 
-For $\mathcal{L} = \mathcal{L}_0 - \frac{\lambda}{4!}\phi^4$ ($\lambda \equiv g$), the interacting generating functional is:
+For $`\mathcal{L} = \mathcal{L}_0 - \frac{\lambda}{4!}\phi^4`$ ($`\lambda \equiv g`$), the interacting generating functional is:
 
-$$Z[J] = \exp\left[-i\frac{\lambda}{4!} \int d^4z \left(-i\frac{\delta}{\delta J(z)}\right)^4\right] Z_0[J]$$
+```math
+Z[J] = \exp\left[-i\frac{\lambda}{4!} \int d^4z \left(-i\frac{\delta}{\delta J(z)}\right)^4\right] Z_0[J]
+```
 
-In momentum-space Feynman diagrams for $\phi^4$ theory (P&S p. 95):
+In momentum-space Feynman diagrams for $`\phi^4`$ theory (P&S p. 95):
 
-1. **Internal propagator:** $\frac{i}{p^2 - m^2 + i\epsilon}$.
+1. **Internal propagator:** $`\frac{i}{p^2 - m^2 + i\epsilon}`$.
 
-2. **Vertex:** $-i\lambda$ (with $(2\pi)^4\delta^{(4)}(\sum p_{\text{in}})$ conserving 4-momentum at each vertex).
+2. **Vertex:** $`-i\lambda`$ (with $`(2\pi)^4\delta^{(4)}(\sum p_{\text{in}})`$ conserving 4-momentum at each vertex).
 
-3. **External leg:** $e^{-ip\cdot x}$ for correlation functions (replaced by $1$ after LSZ amputation for $S$-matrix elements).
+3. **External leg:** $`e^{-ip\cdot x}`$ for correlation functions (replaced by $`1`$ after LSZ amputation for $`S`$-matrix elements).
 
-4. **Undetermined loop momenta:** Integrate $\int \frac{d^4k}{(2\pi)^4}$.
+4. **Undetermined loop momenta:** Integrate $`\int \frac{d^4k}{(2\pi)^4}`$.
 
-5. **Divide by the symmetry factor $S$:** The $\frac{1}{n!}$ from the Taylor expansion cancels the $n!$ permutations of the $n$ vertices, and $\frac{1}{4!}$ cancels the $4!$ leg attachments at each vertex, *except* when the diagram possesses automorphisms leaving external points fixed (P&S p. 93):
+5. **Divide by the symmetry factor $`S`$:** The $`\frac{1}{n!}`$ from the Taylor expansion cancels the $`n!`$ permutations of the $`n`$ vertices, and $`\frac{1}{4!}`$ cancels the $`4!`$ leg attachments at each vertex, *except* when the diagram possesses automorphisms leaving external points fixed (P&S p. 93):
 
-   - **Self-loop** (line starting and ending on the same vertex): factor of $2$ (e.g., 1-loop tadpole has $S = 2$; figure-eight vacuum bubble has $S = 2 \cdot 2 \cdot 2 = 8$).
+   - **Self-loop** (line starting and ending on the same vertex): factor of $`2`$ (e.g., 1-loop tadpole has $`S = 2`$; figure-eight vacuum bubble has $`S = 2 \cdot 2 \cdot 2 = 8`$).
 
-   - **$k$ identical internal propagators** connecting the same two vertices: factor of $k!$ (e.g., 2-loop sunset diagram has $S = 3! = 6$; double-bubble/daisy correction has $S = 3! \cdot 2 = 12$).
+   - **$`k`$ identical internal propagators** connecting the same two vertices: factor of $`k!`$ (e.g., 2-loop sunset diagram has $`S = 3! = 6`$; double-bubble/daisy correction has $`S = 3! \cdot 2 = 12`$).
 
-   - **Identical internal vertices** exchanged without altering external connections: factor of $m!$.
+   - **Identical internal vertices** exchanged without altering external connections: factor of $`m!`$.
 
 ### 3.2 Exponentiation of Disconnected Diagrams & Vacuum Energy Density (P&S §4.4)
 
-Let $\lbrace V_i\rbrace$ denote the set of all distinct connected vacuum-to-vacuum diagrams (bubbles with no external points). Any general diagram contributing to $\langle 0 \vert T\lbrace\phi_I(x)\phi_I(y)\exp(-i\int_{-T}^T dt\, H_I(t))\rbrace \vert 0 \rangle$ consists of a piece connected to external points plus $n_i$ copies of each vacuum bubble $V_i$, carrying symmetry factor $\prod_i \frac{1}{n_i!}(V_i)^{n_i}$. Summing over all $\lbrace n_i\rbrace$ factorizes and exponentiates (P&S Eqs. 4.52–4.54):
+Let $`\{V_i\}`$ denote the set of all distinct connected vacuum-to-vacuum diagrams (bubbles with no external points). Any general diagram contributing to $`\langle 0 \vert T\{\phi_I(x)\phi_I(y)\exp(-i\int_{-T}^T dt\, H_I(t))\} \vert 0 \rangle`$ consists of a piece connected to external points plus $`n_i`$ copies of each vacuum bubble $`V_i`$, carrying symmetry factor $`\prod_i \frac{1}{n_i!}(V_i)^{n_i}`$. Summing over all $`\{n_i\}`$ factorizes and exponentiates (P&S Eqs. 4.52–4.54):
 
-$$\sum_{\text{all diagrams}} = \left(\sum_{\text{connected diagrams}}\right) \times \sum_{\lbrace n_i\rbrace} \prod_i \frac{1}{n_i!}(V_i)^{n_i} = \left(\sum_{\text{connected diagrams}}\right) \times \exp\left(\sum_i V_i\right)$$
+```math
+\sum_{\text{all diagrams}} = \left(\sum_{\text{connected diagrams}}\right) \times \sum_{\{n_i\}} \prod_i \frac{1}{n_i!}(V_i)^{n_i} = \left(\sum_{\text{connected diagrams}}\right) \times \exp\left(\sum_i V_i\right)
+```
 
-Because the denominator $Z[0] = \langle 0 \vert T\lbrace\exp(-i\int_{-T}^T dt\, H_I(t))\rbrace \vert 0 \rangle = \exp(\sum_i V_i)$ is identical, all vacuum bubbles cancel out of correlation functions:
+Because the denominator $`Z[0] = \langle 0 \vert T\{\exp(-i\int_{-T}^T dt\, H_I(t))\} \vert 0 \rangle = \exp(\sum_i V_i)`$ is identical, all vacuum bubbles cancel out of correlation functions:
 
-$$\langle \Omega \vert T\lbrace\phi(x_1)\cdots\phi(x_n)\rbrace \vert \Omega \rangle = \left(\text{sum of all diagrams with } n \text{ external points and no vacuum bubbles}\right)$$
+```math
+\langle \Omega \vert T\{\phi(x_1)\cdots\phi(x_n)\} \vert \Omega \rangle = \left(\text{sum of all diagrams with } n \text{ external points and no vacuum bubbles}\right)
+```
 
-Comparing the $T$-dependence of $\langle 0 \vert T\lbrace\exp(-i\int_{-T}^T dt\, H_I)\rbrace \vert 0 \rangle \propto e^{-iE_0(2T)}$ and noting that each $V_i$ contains a global spacetime volume factor $(2\pi)^4\delta^{(4)}(0) = (2T) \cdot V_{\text{space}}$ gives the **vacuum energy density** (P&S Eq. 4.56):
+Comparing the $`T`$-dependence of $`\langle 0 \vert T\{\exp(-i\int_{-T}^T dt\, H_I)\} \vert 0 \rangle \propto e^{-iE_0(2T)}`$ and noting that each $`V_i`$ contains a global spacetime volume factor $`(2\pi)^4\delta^{(4)}(0) = (2T) \cdot V_{\text{space}}`$ gives the **vacuum energy density** (P&S Eq. 4.56):
 
-$$\frac{E_0}{V_{\text{space}}} = i\left[\sum_i V_i\right] \Big/ \left[(2\pi)^4\delta^{(4)}(0)\right]$$
+```math
+\frac{E_0}{V_{\text{space}}} = i\left[\sum_i V_i\right] \Big/ \left[(2\pi)^4\delta^{(4)}(0)\right]
+```
 
 ---
 
@@ -142,155 +172,203 @@ $$\frac{E_0}{V_{\text{space}}} = i\left[\sum_i V_i\right] \Big/ \left[(2\pi)^4\d
 
 ### 4.1 Chiral Representation, Spinors & Spin Sums (P&S §3.2–3.4)
 
-In P&S's chiral (Weyl) basis, $\lbrace\gamma^\mu, \gamma^\nu\rbrace = 2g^{\mu\nu}$, $\gamma^5 \equiv i\gamma^0\gamma^1\gamma^2\gamma^3 = \begin{pmatrix} -1 & 0 \\\\ 0 & 1 \end{pmatrix}$, and:
+In P&S's chiral (Weyl) basis, $`\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}`$, $`\gamma^5 \equiv i\gamma^0\gamma^1\gamma^2\gamma^3 = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}`$, and:
 
-$$\gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\\\ \bar{\sigma}^\mu & 0 \end{pmatrix}, \qquad \sigma^\mu = (1, \boldsymbol{\sigma}), \qquad \bar{\sigma}^\mu = (1, -\boldsymbol{\sigma})$$
+```math
+\gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\ \bar{\sigma}^\mu & 0 \end{pmatrix}, \qquad \sigma^\mu = (1, \boldsymbol{\sigma}), \qquad \bar{\sigma}^\mu = (1, -\boldsymbol{\sigma})
+```
 
-A Dirac spinor splits into left- and right-handed Weyl spinors $\psi = \binom{\psi_L}{\psi_R}$ transforming in the $(\frac{1}{2}, 0)$ and $(0, \frac{1}{2})$ representations of the Lorentz group. The plane-wave spinors $u^s(p)$ (positive frequency) and $v^s(p)$ (negative frequency) satisfy:
+A Dirac spinor splits into left- and right-handed Weyl spinors $`\psi = \binom{\psi_L}{\psi_R}`$ transforming in the $`(\frac{1}{2}, 0)`$ and $`(0, \frac{1}{2})`$ representations of the Lorentz group. The plane-wave spinors $`u^s(p)`$ (positive frequency) and $`v^s(p)`$ (negative frequency) satisfy:
 
-$$u^s(p) = \begin{pmatrix} \sqrt{p\cdot\sigma}\,\xi^s \\\\ \sqrt{p\cdot\bar{\sigma}}\,\xi^s \end{pmatrix}, \qquad v^s(p) = \begin{pmatrix} \sqrt{p\cdot\sigma}\,\eta^s \\\\ -\sqrt{p\cdot\bar{\sigma}}\,\eta^s \end{pmatrix}$$
+```math
+u^s(p) = \begin{pmatrix} \sqrt{p\cdot\sigma}\,\xi^s \\ \sqrt{p\cdot\bar{\sigma}}\,\xi^s \end{pmatrix}, \qquad v^s(p) = \begin{pmatrix} \sqrt{p\cdot\sigma}\,\eta^s \\ -\sqrt{p\cdot\bar{\sigma}}\,\eta^s \end{pmatrix}
+```
 
-$$\bar{u}^r(p)u^s(p) = 2m\delta^{rs}, \qquad \bar{v}^r(p)v^s(p) = -2m\delta^{rs}, \qquad \sum_{s=1,2} u^s(p)\bar{u}^s(p) = \not{p} + m, \qquad \sum_{s=1,2} v^s(p)\bar{v}^s(p) = \not{p} - m$$
+```math
+\bar{u}^r(p)u^s(p) = 2m\delta^{rs}, \qquad \bar{v}^r(p)v^s(p) = -2m\delta^{rs}, \qquad \sum_{s=1,2} u^s(p)\bar{u}^s(p) = \not{p} + m, \qquad \sum_{s=1,2} v^s(p)\bar{v}^s(p) = \not{p} - m
+```
 
-where $\not{p} \equiv \gamma^\mu p_\mu$ and $\bar{\psi} \equiv \psi^\dagger\gamma^0$. Under discrete symmetries $P, T, C$ (with $T$ antiunitary), $\mathcal{L}_{\text{Dirac}} = \bar{\psi}(i\not{\partial} - m)\psi$ is invariant under each separately, and any Hermitian Lorentz-scalar interaction is invariant under $CPT$ (P&S §3.6, p. 71).
+where $`\not{p} \equiv \gamma^\mu p_\mu`$ and $`\bar{\psi} \equiv \psi^\dagger\gamma^0`$. Under discrete symmetries $`P, T, C`$ (with $`T`$ antiunitary), $`\mathcal{L}_{\text{Dirac}} = \bar{\psi}(i\not{\partial} - m)\psi`$ is invariant under each separately, and any Hermitian Lorentz-scalar interaction is invariant under $`CPT`$ (P&S §3.6, p. 71).
 
 ### 4.2 Berezin Calculus & Fermionic Path Integral (P&S §9.5)
 
-Spinor fields $\psi, \bar{\psi}$ and sources $\eta, \bar{\eta}$ are Grassmann-valued: $\lbrace\theta_i, \theta_j\rbrace = 0 \implies \theta_i^2 = 0$, and $(\theta_1\theta_2)^* = \theta_2^*\theta_1^*$. Berezin integration satisfies $\int d\theta (1) = 0$ and $\int d\theta\,\theta = 1$, which implies that a change of variables $\theta' = A\theta$ transforms the measure with the **inverse** Jacobian ($d\theta' = (\det A)^{-1} d\theta$). Consequently, a complex Grassmann Gaussian integral yields the determinant in the **numerator** (unlike bosons, which yield $(\det M)^{-1/2}$):
+Spinor fields $`\psi, \bar{\psi}`$ and sources $`\eta, \bar{\eta}`$ are Grassmann-valued: $`\{\theta_i, \theta_j\} = 0 \implies \theta_i^2 = 0`$, and $`(\theta_1\theta_2)^* = \theta_2^*\theta_1^*`$. Berezin integration satisfies $`\int d\theta (1) = 0`$ and $`\int d\theta\,\theta = 1`$, which implies that a change of variables $`\theta' = A\theta`$ transforms the measure with the **inverse** Jacobian ($`d\theta' = (\det A)^{-1} d\theta`$). Consequently, a complex Grassmann Gaussian integral yields the determinant in the **numerator** (unlike bosons, which yield $`(\det M)^{-1/2}`$):
 
-$$\int \left(\prod_i d\bar{\theta}_i \, d\theta_i\right) e^{-\bar{\theta}_i M_{ij} \theta_j} = \det M$$
+```math
+\int \left(\prod_i d\bar{\theta}_i \, d\theta_i\right) e^{-\bar{\theta}_i M_{ij} \theta_j} = \det M
+```
 
-For the free Dirac Lagrangian $\mathcal{L}_0 = \bar{\psi}(i\not{\partial} - m)\psi$:
+For the free Dirac Lagrangian $`\mathcal{L}_0 = \bar{\psi}(i\not{\partial} - m)\psi`$:
 
-$$Z_0[\eta, \bar{\eta}] = \int \mathcal{D}\bar{\psi}\mathcal{D}\psi \, \exp\left[i \int d^4x \left(\bar{\psi}(i\not{\partial} - m + i\epsilon)\psi + \bar{\eta}\psi + \bar{\psi}\eta\right)\right] = Z_0[0,0] \exp\left[-\int d^4x \, d^4y \, \bar{\eta}(x) S_F(x - y) \eta(y)\right]$$
+```math
+Z_0[\eta, \bar{\eta}] = \int \mathcal{D}\bar{\psi}\mathcal{D}\psi \, \exp\left[i \int d^4x \left(\bar{\psi}(i\not{\partial} - m + i\epsilon)\psi + \bar{\eta}\psi + \bar{\psi}\eta\right)\right] = Z_0[0,0] \exp\left[-\int d^4x \, d^4y \, \bar{\eta}(x) S_F(x - y) \eta(y)\right]
+```
 
-where $Z_0[0,0] = \det(i\not{\partial} - m + i\epsilon)$ and the **Dirac Feynman propagator** is:
+where $`Z_0[0,0] = \det(i\not{\partial} - m + i\epsilon)`$ and the **Dirac Feynman propagator** is:
 
-$$S_F(x - y) = \langle 0 \vert T\psi(x)\bar{\psi}(y) \vert 0 \rangle = \left.\frac{1}{Z_0[0,0]}\left(-i\frac{\delta}{\delta\bar{\eta}(x)}\right)\left(+i\frac{\delta}{\delta\eta(y)}\right) Z_0[\eta, \bar{\eta}]\right\rvert_{\eta=\bar{\eta}=0} = \int \frac{d^4p}{(2\pi)^4} \frac{i(\not{p} + m)}{p^2 - m^2 + i\epsilon} e^{-ip\cdot(x - y)}$$
+```math
+S_F(x - y) = \langle 0 \vert T\psi(x)\bar{\psi}(y) \vert 0 \rangle = \left.\frac{1}{Z_0[0,0]}\left(-i\frac{\delta}{\delta\bar{\eta}(x)}\right)\left(+i\frac{\delta}{\delta\eta(y)}\right) Z_0[\eta, \bar{\eta}]\right\rvert_{\eta=\bar{\eta}=0} = \int \frac{d^4p}{(2\pi)^4} \frac{i(\not{p} + m)}{p^2 - m^2 + i\epsilon} e^{-ip\cdot(x - y)}
+```
 
-Notice the sign change from differentiating left-to-right past Grassmann sources: $\frac{\delta}{\delta\eta(y)}(\bar{\eta}\eta) = -\bar{\eta}\frac{\delta\eta}{\delta\eta(y)}$. This anticommutativity automatically enforces Fermi–Dirac statistics, time-ordering sign flips $T\psi(x)\bar{\psi}(y) = -\bar{\psi}(y)\psi(x)$ for $x^0 < y^0$, and a **factor of $(-1)$ for every closed fermion loop**.
+Notice the sign change from differentiating left-to-right past Grassmann sources: $`\frac{\delta}{\delta\eta(y)}(\bar{\eta}\eta) = -\bar{\eta}\frac{\delta\eta}{\delta\eta(y)}`$. This anticommutativity automatically enforces Fermi–Dirac statistics, time-ordering sign flips $`T\psi(x)\bar{\psi}(y) = -\bar{\psi}(y)\psi(x)`$ for $`x^0 < y^0`$, and a **factor of $`(-1)`$ for every closed fermion loop**.
 
 ---
 
-## 5. Connected Diagrams $W[J]$, 1PI Self-Energy & Effective Action $\Gamma[\phi_c]$ (P&S §7.1, §11.3–11.5)
+## 5. Connected Diagrams $`W[J]`$, 1PI Self-Energy & Effective Action $`\Gamma[\phi_c]`$ (P&S §7.1, §11.3–11.5)
 
-### 5.1 Connected Generating Functional $W[J]$ (P&S §11.3)
+### 5.1 Connected Generating Functional $`W[J]`$ (P&S §11.3)
 
-Define $W[J]$ (denoted $E[J]$ in Euclidean space in P&S §11.3) via:
+Define $`W[J]`$ (denoted $`E[J]`$ in Euclidean space in P&S §11.3) via:
 
-$$Z[J] = e^{iW[J]} \iff W[J] = -i \ln Z[J]$$
+```math
+Z[J] = e^{iW[J]} \iff W[J] = -i \ln Z[J]
+```
 
-Because $\ln Z[J]$ takes the logarithm of the exponential of connected vacuum diagrams in the presence of $J$, functional derivatives of $W[J]$ generate **only connected** Green's functions $G_c^{(n)}$:
+Because $`\ln Z[J]`$ takes the logarithm of the exponential of connected vacuum diagrams in the presence of $`J`$, functional derivatives of $`W[J]`$ generate **only connected** Green's functions $`G_c^{(n)}`$:
 
-$$G_c^{(n)}(x_1, \dots, x_n) = (-i)^{n-1} \left. \frac{\delta^n W[J]}{\delta J(x_1)\cdots \delta J(x_n)} \right\rvert_{J=0}$$
+```math
+G_c^{(n)}(x_1, \dots, x_n) = (-i)^{n-1} \left. \frac{\delta^n W[J]}{\delta J(x_1)\cdots \delta J(x_n)} \right\rvert_{J=0}
+```
 
-> **Correction (Terminology on Note Page 26):** Page 26 calls $W[J] = -i\ln Z[J]$ a "Legendre Transformation". $W[J]$ is the **connected (cumulant) generating functional**; the **Legendre transformation** is the step from $W[J]$ to the 1PI effective action $\Gamma[\phi_c]$ below.
+> **Correction (Terminology on Note Page 26):** Page 26 calls $`W[J] = -i\ln Z[J]`$ a "Legendre Transformation". $`W[J]`$ is the **connected (cumulant) generating functional**; the **Legendre transformation** is the step from $`W[J]`$ to the 1PI effective action $`\Gamma[\phi_c]`$ below.
 
-### 5.2 Dyson Resummation, Pole Mass & Field-Strength Renormalization $Z$ (P&S §7.1)
+### 5.2 Dyson Resummation, Pole Mass & Field-Strength Renormalization $`Z`$ (P&S §7.1)
 
-A diagram is **one-particle irreducible (1PI)** if it remains connected when any single internal line is cut. Let $-iM^2(p^2) \equiv -i\Sigma(p^2)$ denote the sum of all amputated 1PI 2-point insertions (at 1-loop in $\phi^4$, the tadpole; at 2-loops, the sunset and double-tadpole/daisy diagrams). Summing the geometric series of 1PI insertions gives the exact connected propagator (P&S Eq. 7.3):
+A diagram is **one-particle irreducible (1PI)** if it remains connected when any single internal line is cut. Let $`-iM^2(p^2) \equiv -i\Sigma(p^2)`$ denote the sum of all amputated 1PI 2-point insertions (at 1-loop in $`\phi^4`$, the tadpole; at 2-loops, the sunset and double-tadpole/daisy diagrams). Summing the geometric series of 1PI insertions gives the exact connected propagator (P&S Eq. 7.3):
 
-$$G_c^{(2)}(p) = \frac{i}{p^2 - m_0^2} + \frac{i}{p^2 - m_0^2}\big(-i\Sigma(p^2)\big)\frac{i}{p^2 - m_0^2} + \cdots = \frac{i}{p^2 - m_0^2 - \Sigma(p^2) + i\epsilon}$$
+```math
+G_c^{(2)}(p) = \frac{i}{p^2 - m_0^2} + \frac{i}{p^2 - m_0^2}\big(-i\Sigma(p^2)\big)\frac{i}{p^2 - m_0^2} + \cdots = \frac{i}{p^2 - m_0^2 - \Sigma(p^2) + i\epsilon}
+```
 
-> **Missing Detail Filled In (Residue $Z$ & Källén–Lehmann Spectral Representation, P&S §7.1):**
-> The **physical mass** $m_{\text{phys}}$ is the location of the pole in $G_c^{(2)}(p)$:
+> **Missing Detail Filled In (Residue $`Z`$ & Källén–Lehmann Spectral Representation, P&S §7.1):**
+> The **physical mass** $`m_{\text{phys}}`$ is the location of the pole in $`G_c^{(2)}(p)`$:
 >
-> $$m_{\text{phys}}^2 - m_0^2 - \Sigma(m_{\text{phys}}^2) = 0$$
+> ```math
+> m_{\text{phys}}^2 - m_0^2 - \Sigma(m_{\text{phys}}^2) = 0
+> ```
 >
-> Expanding the denominator around $p^2 = m_{\text{phys}}^2$ via $\Sigma(p^2) \approx \Sigma(m_{\text{phys}}^2) + (p^2 - m_{\text{phys}}^2)\left.\frac{d\Sigma}{dp^2}\right\rvert_{p^2 = m_{\text{phys}}^2}$ yields:
+> Expanding the denominator around $`p^2 = m_{\text{phys}}^2`$ via $`\Sigma(p^2) \approx \Sigma(m_{\text{phys}}^2) + (p^2 - m_{\text{phys}}^2)\left.\frac{d\Sigma}{dp^2}\right\rvert_{p^2 = m_{\text{phys}}^2}`$ yields:
 >
-> $$G_c^{(2)}(p) \xrightarrow{p^2 \to m_{\text{phys}}^2} \frac{i Z}{p^2 - m_{\text{phys}}^2 + i\epsilon} + (\text{regular multiparticle continuum for } p^2 \ge (3m_{\text{phys}})^2)$$
+> ```math
+> G_c^{(2)}(p) \xrightarrow{p^2 \to m_{\text{phys}}^2} \frac{i Z}{p^2 - m_{\text{phys}}^2 + i\epsilon} + (\text{regular multiparticle continuum for } p^2 \ge (3m_{\text{phys}})^2)
+> ```
 >
-> where the **field-strength (wave-function) renormalization constant** $Z = \lvert\langle \Omega \vert \phi(0) \vert \mathbf{p}=0 \rangle\rvert^2$ is the residue at the single-particle pole:
+> where the **field-strength (wave-function) renormalization constant** $`Z = \lvert\langle \Omega \vert \phi(0) \vert \mathbf{p}=0 \rangle\rvert^2`$ is the residue at the single-particle pole:
 >
-> $$Z^{-1} = 1 - \left.\frac{d\Sigma(p^2)}{dp^2}\right\rvert_{p^2 = m_{\text{phys}}^2}$$
+> ```math
+> Z^{-1} = 1 - \left.\frac{d\Sigma(p^2)}{dp^2}\right\rvert_{p^2 = m_{\text{phys}}^2}
+> ```
 >
-> In $\phi^4$ theory at $O(\lambda)$, $\Sigma$ is momentum-independent ($\frac{d\Sigma}{dp^2} = 0$), so $Z = 1 + O(\lambda^2)$.
+> In $`\phi^4`$ theory at $`O(\lambda)`$, $`\Sigma`$ is momentum-independent ($`\frac{d\Sigma}{dp^2} = 0`$), so $`Z = 1 + O(\lambda^2)`$.
 
-### 5.3 Legendre Transform & 1PI Effective Action $\Gamma[\phi_c]$ (P&S §11.3, §11.5)
+### 5.3 Legendre Transform & 1PI Effective Action $`\Gamma[\phi_c]`$ (P&S §11.3, §11.5)
 
-Define the classical field expectation value $\phi_c(x) \equiv \frac{\delta W[J]}{\delta J(x)} = \langle \Omega \vert \phi(x) \vert \Omega \rangle_J$. Inverting to express $J = J[\phi_c]$, the **1PI Effective Action** is the Legendre transform:
+Define the classical field expectation value $`\phi_c(x) \equiv \frac{\delta W[J]}{\delta J(x)} = \langle \Omega \vert \phi(x) \vert \Omega \rangle_J`$. Inverting to express $`J = J[\phi_c]`$, the **1PI Effective Action** is the Legendre transform:
 
-$$\Gamma[\phi_c] \equiv W[J] - \int d^4x \, J(x)\phi_c(x) \implies \frac{\delta \Gamma[\phi_c]}{\delta \phi_c(x)} = -J(x)$$
+```math
+\Gamma[\phi_c] \equiv W[J] - \int d^4x \, J(x)\phi_c(x) \implies \frac{\delta \Gamma[\phi_c]}{\delta \phi_c(x)} = -J(x)
+```
 
-In the absence of external sources ($J = 0$), the true vacuum expectation value minimizes $\Gamma[\phi_c]$: $\frac{\delta\Gamma[\phi_c]}{\delta\phi_c(x)} = 0$ (the quantum equation of motion, central to spontaneous symmetry breaking and the Coleman–Weinberg potential, P&S §11.1–11.4).
+In the absence of external sources ($`J = 0`$), the true vacuum expectation value minimizes $`\Gamma[\phi_c]`$: $`\frac{\delta\Gamma[\phi_c]}{\delta\phi_c(x)} = 0`$ (the quantum equation of motion, central to spontaneous symmetry breaking and the Coleman–Weinberg potential, P&S §11.1–11.4).
 
-Differentiating $\frac{\delta W}{\delta J(x)} = \phi_c(x)$ with respect to $\phi_c(y)$ establishes that $\Gamma^{(2)}$ and $G_c^{(2)}$ are functional inverses:
+Differentiating $`\frac{\delta W}{\delta J(x)} = \phi_c(x)`$ with respect to $`\phi_c(y)`$ establishes that $`\Gamma^{(2)}`$ and $`G_c^{(2)}`$ are functional inverses:
 
-$$\int d^4z \, \frac{\delta^2 W[J]}{\delta J(x)\delta J(z)} \frac{\delta^2 \Gamma[\phi_c]}{\delta \phi_c(z)\delta \phi_c(y)} = -\delta^{(4)}(x - y) \implies \Gamma^{(2)}(p) = \frac{i}{G_c^{(2)}(p)} = p^2 - m_0^2 - \Sigma(p^2)$$
+```math
+\int d^4z \, \frac{\delta^2 W[J]}{\delta J(x)\delta J(z)} \frac{\delta^2 \Gamma[\phi_c]}{\delta \phi_c(z)\delta \phi_c(y)} = -\delta^{(4)}(x - y) \implies \Gamma^{(2)}(p) = \frac{i}{G_c^{(2)}(p)} = p^2 - m_0^2 - \Sigma(p^2)
+```
 
-Expanding $\Gamma[\phi_c] = \sum_{n=0}^{\infty} \frac{1}{n!} \int d^4x_1\cdots d^4x_n \, \Gamma^{(n)}(x_1,\dots,x_n)\phi_c(x_1)\cdots\phi_c(x_n)$ shows that $\Gamma^{(n)}$ generates all **amputated 1PI $n$-point vertex functions** (P&S §11.5).
+Expanding $`\Gamma[\phi_c] = \sum_{n=0}^{\infty} \frac{1}{n!} \int d^4x_1\cdots d^4x_n \, \Gamma^{(n)}(x_1,\dots,x_n)\phi_c(x_1)\cdots\phi_c(x_n)`$ shows that $`\Gamma^{(n)}`$ generates all **amputated 1PI $`n`$-point vertex functions** (P&S §11.5).
 
 ---
 
 ## 6. QED Functional Quantization, Faddeev–Popov & Ward–Takahashi Identity (P&S §4.1, §7.4, §9.4, §9.6)
 
-### 6.1 Faddeev–Popov Gauge Fixing & $R_\xi$ Photon Propagator (P&S §9.4)
+### 6.1 Faddeev–Popov Gauge Fixing & $`R_\xi`$ Photon Propagator (P&S §9.4)
 
-The QED Lagrangian $\mathcal{L}_{\text{QED}} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \bar{\psi}(i\not{D} - m)\psi$ ($D_\mu = \partial_\mu + ieA_\mu$, $e = -|e|$) is invariant under $A_\mu \to A_\mu + \frac{1}{e}\partial_\mu\alpha(x)$ and $\psi \to e^{-i\alpha(x)}\psi$. Because the quadratic gauge operator $(g^{\mu\nu}\Box - \partial^\mu\partial^\nu)$ annihilates longitudinal pure-gauge configurations $A_\mu = \partial_\mu\alpha$, the naive path integral $\int \mathcal{D}A_\mu \, e^{iS[A]}$ overcounts gauge orbits by an infinite group volume $\int \mathcal{D}\alpha$.
+The QED Lagrangian $`\mathcal{L}_{\text{QED}} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \bar{\psi}(i\not{D} - m)\psi`$ ($`D_\mu = \partial_\mu + ieA_\mu`$, $`e = -\lvert e\rvert`$) is invariant under $`A_\mu \to A_\mu + \frac{1}{e}\partial_\mu\alpha(x)`$ and $`\psi \to e^{-i\alpha(x)}\psi`$. Because the quadratic gauge operator $`(g^{\mu\nu}\Box - \partial^\mu\partial^\nu)`$ annihilates longitudinal pure-gauge configurations $`A_\mu = \partial_\mu\alpha`$, the naive path integral $`\int \mathcal{D}A_\mu \, e^{iS[A]}`$ overcounts gauge orbits by an infinite group volume $`\int \mathcal{D}\alpha`$.
 
 > **Missing Derivation Filled In (Faddeev–Popov Procedure, P&S §9.4):**
-> To isolate a single slice per gauge orbit, impose a generalized Lorenz condition $G(A) = \partial_\mu A^\mu(x) - \omega(x) = 0$ by inserting the identity:
+> To isolate a single slice per gauge orbit, impose a generalized Lorenz condition $`G(A) = \partial_\mu A^\mu(x) - \omega(x) = 0`$ by inserting the identity:
 >
-> $$1 = \int \mathcal{D}\alpha(x) \, \delta\big(G(A^\alpha)\big) \det\left(\frac{\delta G(A^\alpha)}{\delta \alpha}\right), \qquad \frac{\delta G(A^\alpha)}{\delta\alpha} = \frac{1}{e}\Box$$
+> ```math
+> 1 = \int \mathcal{D}\alpha(x) \, \delta\big(G(A^\alpha)\big) \det\left(\frac{\delta G(A^\alpha)}{\delta \alpha}\right), \qquad \frac{\delta G(A^\alpha)}{\delta\alpha} = \frac{1}{e}\Box
+> ```
 >
-> Because $\det(\frac{1}{e}\Box)$ is independent of $A_\mu$ in an Abelian gauge theory (ghosts decouple, unlike in non-Abelian Yang–Mills theory, P&S §16.2), it is absorbed into the normalization. Integrating over $\omega(x)$ with Gaussian weight $\exp\left[-i\int d^4x \, \frac{\omega^2(x)}{2\xi}\right]$ replaces $\delta(\partial_\mu A^\mu - \omega)$ with the gauge-fixing term $-\frac{1}{2\xi}(\partial_\mu A^\mu)^2$ in $\mathcal{L}_{\text{eff}}$.
+> Because $`\det(\frac{1}{e}\Box)`$ is independent of $`A_\mu`$ in an Abelian gauge theory (ghosts decouple, unlike in non-Abelian Yang–Mills theory, P&S §16.2), it is absorbed into the normalization. Integrating over $`\omega(x)`$ with Gaussian weight $`\exp\left[-i\int d^4x \, \frac{\omega^2(x)}{2\xi}\right]`$ replaces $`\delta(\partial_\mu A^\mu - \omega)`$ with the gauge-fixing term $`-\frac{1}{2\xi}(\partial_\mu A^\mu)^2`$ in $`\mathcal{L}_{\text{eff}}`$.
 
-In momentum space, the gauge-fixed kinetic operator $\left(-g^{\mu\nu}k^2 + \left(1 - \frac{1}{\xi}\right)k^\mu k^\nu\right)$ inverts to the general **$R_\xi$ photon propagator**:
+In momentum space, the gauge-fixed kinetic operator $`\left(-g^{\mu\nu}k^2 + \left(1 - \frac{1}{\xi}\right)k^\mu k^\nu\right)`$ inverts to the general **$`R_\xi`$ photon propagator**:
 
-$$D_F^{\mu\nu}(k) = \frac{-i}{k^2 + i\epsilon}\left(g^{\mu\nu} - (1 - \xi)\frac{k^\mu k^\nu}{k^2}\right)$$
+```math
+D_F^{\mu\nu}(k) = \frac{-i}{k^2 + i\epsilon}\left(g^{\mu\nu} - (1 - \xi)\frac{k^\mu k^\nu}{k^2}\right)
+```
 
-Setting $\xi = 1$ gives **Feynman gauge** $D_F^{\mu\nu}(k) = \frac{-ig^{\mu\nu}}{k^2 + i\epsilon}$ (correcting the missing minus sign on Note Page 47); $\xi = 0$ gives **Landau gauge**.
+Setting $`\xi = 1`$ gives **Feynman gauge** $`D_F^{\mu\nu}(k) = \frac{-ig^{\mu\nu}}{k^2 + i\epsilon}`$ (correcting the missing minus sign on Note Page 47); $`\xi = 0`$ gives **Landau gauge**.
 
 ### 6.2 Functional Derivation of the Ward–Takahashi Identity (P&S §9.6, §7.4)
 
-Change dummy integration variables in $Z[J^\mu, \eta, \bar{\eta}]$ by an infinitesimal gauge transformation $\psi(x) \to (1 - i\alpha(x))\psi(x)$, $\bar{\psi}(x) \to (1 + i\alpha(x))\bar{\psi}(x)$, and $A_\mu(x) \to A_\mu(x) + \frac{1}{e}\partial_\mu\alpha(x)$. Since $\mathcal{L}_{\text{QED}}$ and the functional measure are invariant (in the absence of chiral anomalies, P&S §19.2), only the gauge-fixing and source terms vary:
+Change dummy integration variables in $`Z[J^\mu, \eta, \bar{\eta}]`$ by an infinitesimal gauge transformation $`\psi(x) \to (1 - i\alpha(x))\psi(x)`$, $`\bar{\psi}(x) \to (1 + i\alpha(x))\bar{\psi}(x)`$, and $`A_\mu(x) \to A_\mu(x) + \frac{1}{e}\partial_\mu\alpha(x)`$. Since $`\mathcal{L}_{\text{QED}}`$ and the functional measure are invariant (in the absence of chiral anomalies, P&S §19.2), only the gauge-fixing and source terms vary:
 
-$$\delta \mathcal{L}_{\text{eff}} = -\frac{1}{e\xi}(\partial_\mu A^\mu)\Box\alpha + \frac{1}{e}J^\mu\partial_\mu\alpha - i\alpha(\bar{\eta}\psi - \bar{\psi}\eta)$$
+```math
+\delta \mathcal{L}_{\text{eff}} = -\frac{1}{e\xi}(\partial_\mu A^\mu)\Box\alpha + \frac{1}{e}J^\mu\partial_\mu\alpha - i\alpha(\bar{\eta}\psi - \bar{\psi}\eta)
+```
 
-Integrating by parts and setting the coefficient of $\alpha(x)$ to zero gives the **Ward–Takahashi Functional Identity** (P&S Eq. 9.104):
+Integrating by parts and setting the coefficient of $`\alpha(x)`$ to zero gives the **Ward–Takahashi Functional Identity** (P&S Eq. 9.104):
 
-$$\left[\frac{1}{\xi}\Box\partial_\mu\left(-i\frac{\delta}{\delta J_\mu(x)}\right) - \partial_\mu J^\mu(x) - ie\left(\bar{\eta}(x)\frac{\delta}{\delta\bar{\eta}(x)} - \eta(x)\frac{\delta}{\delta\eta(x)}\right)\right] Z[J^\mu, \eta, \bar{\eta}] = 0$$
+```math
+\left[\frac{1}{\xi}\Box\partial_\mu\left(-i\frac{\delta}{\delta J_\mu(x)}\right) - \partial_\mu J^\mu(x) - ie\left(\bar{\eta}(x)\frac{\delta}{\delta\bar{\eta}(x)} - \eta(x)\frac{\delta}{\delta\eta(x)}\right)\right] Z[J^\mu, \eta, \bar{\eta}] = 0
+```
 
-Differentiating with respect to $\eta(x_1)$ and $\bar{\eta}(x_2)$ at zero sources, Fourier transforming, and amputating the external photon propagator $\left(\frac{-i\xi q_\mu}{q^2}\right)$ and full fermion propagators $S_F'(p), S_F'(p+q)$ yields the exact **Ward–Takahashi Identity** for the amputated 1PI photon–fermion vertex $\Gamma^\mu(p+q, p)$ (P&S Eq. 7.67):
+Differentiating with respect to $`\eta(x_1)`$ and $`\bar{\eta}(x_2)`$ at zero sources, Fourier transforming, and amputating the external photon propagator $`\left(\frac{-i\xi q_\mu}{q^2}\right)`$ and full fermion propagators $`S_F'(p), S_F'(p+q)`$ yields the exact **Ward–Takahashi Identity** for the amputated 1PI photon–fermion vertex $`\Gamma^\mu(p+q, p)`$ (P&S Eq. 7.67):
 
-$$q_\mu \Gamma^\mu(p + q, p) = {S_F'}^{-1}(p + q) - {S_F'}^{-1}(p)$$
+```math
+q_\mu \Gamma^\mu(p + q, p) = {S_F'}^{-1}(p + q) - {S_F'}^{-1}(p)
+```
 
-Taking $q_\mu \to 0$ yields the **Ward Identity** $\Gamma^\mu(p, p) = \frac{\partial {S_F'}^{-1}(p)}{\partial p_\mu}$, proving that the vertex counterterm $Z_1$ and fermion field-strength renormalization $Z_2$ satisfy $Z_1 = Z_2$ to all orders in perturbation theory—guaranteeing that radiative corrections do not renormalize the ratio of charges between different particles (charge universality, P&S §7.5).
+Taking $`q_\mu \to 0`$ yields the **Ward Identity** $`\Gamma^\mu(p, p) = \frac{\partial {S_F'}^{-1}(p)}{\partial p_\mu}`$, proving that the vertex counterterm $`Z_1`$ and fermion field-strength renormalization $`Z_2`$ satisfy $`Z_1 = Z_2`$ to all orders in perturbation theory—guaranteeing that radiative corrections do not renormalize the ratio of charges between different particles (charge universality, P&S §7.5).
 
 ---
 
-## 7. $S$-Matrix, Cross Sections & LSZ Reduction Formula (P&S §4.5, §7.2)
+## 7. $`S`$-Matrix, Cross Sections & LSZ Reduction Formula (P&S §4.5, §7.2)
 
-### 7.1 The $S$-Matrix, Cross Sections & Breit–Wigner Resonances (P&S §4.5)
+### 7.1 The $`S`$-Matrix, Cross Sections & Breit–Wigner Resonances (P&S §4.5)
 
-Asymptotic *in* states $\lvert\mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle_{\text{in}}$ ($t \to -\infty$) and *out* states ${}_{\text{out}}\langle \mathbf{p}_1\cdots\mathbf{p}_n\rvert$ ($t \to +\infty$) are related by the unitary $S$-matrix, decomposed into forward no-scattering plus the transition matrix $T$:
+Asymptotic *in* states $`\lvert\mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle_{\text{in}}`$ ($`t \to -\infty`$) and *out* states $`{}_{\text{out}}\langle \mathbf{p}_1\cdots\mathbf{p}_n\rvert`$ ($`t \to +\infty`$) are related by the unitary $`S`$-matrix, decomposed into forward no-scattering plus the transition matrix $`T`$:
 
-$${}_{\text{out}}\langle \mathbf{p}_1\cdots\mathbf{p}_n \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle_{\text{in}} \equiv \langle \mathbf{p}_1\cdots\mathbf{p}_n \vert S \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle, \qquad S = \mathbf{1} + iT$$
+```math
+{}_{\text{out}}\langle \mathbf{p}_1\cdots\mathbf{p}_n \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle_{\text{in}} \equiv \langle \mathbf{p}_1\cdots\mathbf{p}_n \vert S \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle, \qquad S = \mathbf{1} + iT
+```
 
-Factoring out overall 4-momentum conservation defines the **invariant matrix element** $\mathcal{M}$ (P&S Eq. 4.73):
+Factoring out overall 4-momentum conservation defines the **invariant matrix element** $`\mathcal{M}`$ (P&S Eq. 4.73):
 
-$$\langle \mathbf{p}_1\cdots\mathbf{p}_n \vert iT \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle = (2\pi)^4\delta^{(4)}\left(k_{\mathcal{A}} + k_{\mathcal{B}} - \sum_f p_f\right) \cdot i\mathcal{M}(k_{\mathcal{A}}, k_{\mathcal{B}} \to \lbrace p_f\rbrace)$$
+```math
+\langle \mathbf{p}_1\cdots\mathbf{p}_n \vert iT \vert \mathbf{k}_{\mathcal{A}}\mathbf{k}_{\mathcal{B}}\rangle = (2\pi)^4\delta^{(4)}\left(k_{\mathcal{A}} + k_{\mathcal{B}} - \sum_f p_f\right) \cdot i\mathcal{M}(k_{\mathcal{A}}, k_{\mathcal{B}} \to \{p_f\})
+```
 
-Integrating over wavepacket impact parameters $\mathbf{b}$ yields the **differential cross section** (P&S Eq. 4.79):
+Integrating over wavepacket impact parameters $`\mathbf{b}`$ yields the **differential cross section** (P&S Eq. 4.79):
 
-$$d\sigma = \frac{1}{2E_{\mathcal{A}}2E_{\mathcal{B}}\lvert v_{\mathcal{A}} - v_{\mathcal{B}}\rvert} \left(\prod_f \frac{d^3p_f}{(2\pi)^3}\frac{1}{2E_f}\right) \lvert\mathcal{M}(p_{\mathcal{A}}, p_{\mathcal{B}} \to \lbrace p_f\rbrace)\rvert^2 (2\pi)^4\delta^{(4)}\left(p_{\mathcal{A}} + p_{\mathcal{B}} - \sum_f p_f\right)$$
+```math
+d\sigma = \frac{1}{2E_{\mathcal{A}}2E_{\mathcal{B}}\lvert v_{\mathcal{A}} - v_{\mathcal{B}}\rvert} \left(\prod_f \frac{d^3p_f}{(2\pi)^3}\frac{1}{2E_f}\right) \lvert\mathcal{M}(p_{\mathcal{A}}, p_{\mathcal{B}} \to \{p_f\})\rvert^2 (2\pi)^4\delta^{(4)}\left(p_{\mathcal{A}} + p_{\mathcal{B}} - \sum_f p_f\right)
+```
 
-For an unstable intermediate particle of mass $m$ and rest-frame decay width $\Gamma = \tau^{-1}$, resumming 1PI self-energy bubbles shifts the denominator by $\text{Im}\,\Sigma = m\Gamma$ (by the Optical Theorem, P&S §7.3), yielding the relativistic **Breit–Wigner propagator** $\frac{i}{p^2 - m^2 + im\Gamma}$.
+For an unstable intermediate particle of mass $`m`$ and rest-frame decay width $`\Gamma = \tau^{-1}`$, resumming 1PI self-energy bubbles shifts the denominator by $`\text{Im}\,\Sigma = m\Gamma`$ (by the Optical Theorem, P&S §7.3), yielding the relativistic **Breit–Wigner propagator** $`\frac{i}{p^2 - m^2 + im\Gamma}`$.
 
 ### 7.2 Yang–Feldman Equations & The LSZ Reduction Formula (P&S §7.2)
 
-An interacting scalar field obeys $(\Box + m^2)\phi(x) = j(x) \equiv \frac{\partial\mathcal{L}_{\text{int}}}{\partial\phi}$, solved via the **Yang–Feldman equations**:
+An interacting scalar field obeys $`(\Box + m^2)\phi(x) = j(x) \equiv \frac{\partial\mathcal{L}_{\text{int}}}{\partial\phi}`$, solved via the **Yang–Feldman equations**:
 
-$$\phi(x) = \sqrt{Z}\phi_{\text{in}}(x) + \int d^4y \, D_R(x - y)j(y) = \sqrt{Z}\phi_{\text{out}}(x) + \int d^4y \, D_A(x - y)j(y)$$
+```math
+\phi(x) = \sqrt{Z}\phi_{\text{in}}(x) + \int d^4y \, D_R(x - y)j(y) = \sqrt{Z}\phi_{\text{out}}(x) + \int d^4y \, D_A(x - y)j(y)
+```
 
-These hold in the **weak asymptotic sense** for normalizable wavepacket matrix elements: $\lim_{t \to \mp\infty} \langle \alpha \vert \phi(x) \vert \beta \rangle = \sqrt{Z}\langle \alpha \vert \phi_{\text{in/out}}(x) \vert \beta \rangle$, where $\sqrt{Z} = \langle \Omega \vert \phi(0) \vert \mathbf{p} \rangle$ is the field-strength renormalization factor.
+These hold in the **weak asymptotic sense** for normalizable wavepacket matrix elements: $`\lim_{t \to \mp\infty} \langle \alpha \vert \phi(x) \vert \beta \rangle = \sqrt{Z}\langle \alpha \vert \phi_{\text{in/out}}(x) \vert \beta \rangle`$, where $`\sqrt{Z} = \langle \Omega \vert \phi(0) \vert \mathbf{p} \rangle`$ is the field-strength renormalization factor.
 
-Expressing $a_{\text{out}}(p) - a_{\text{in}}(p) = \frac{i}{\sqrt{Z}}\int d^4x \, e^{ip\cdot x}(\Box + m^2)\phi(x)$ via the Klein–Gordon inner product and iterating across all $n$ incoming and $m$ outgoing particles yields the **LSZ Reduction Formula** (P&S Eq. 7.42):
+Expressing $`a_{\text{out}}(p) - a_{\text{in}}(p) = \frac{i}{\sqrt{Z}}\int d^4x \, e^{ip\cdot x}(\Box + m^2)\phi(x)`$ via the Klein–Gordon inner product and iterating across all $`n`$ incoming and $`m`$ outgoing particles yields the **LSZ Reduction Formula** (P&S Eq. 7.42):
 
-$$\prod_{j=1}^m \int d^4y_j \, e^{ip_j'\cdot y_j} \prod_{k=1}^n \int d^4x_k \, e^{-ip_k\cdot x_k} \langle \Omega \vert T\lbrace\phi(y_1)\cdots\phi(y_m)\phi(x_1)\cdots\phi(x_n)\rbrace \vert \Omega \rangle \xrightarrow{p_k^2 \to m^2, \, p_j'^2 \to m^2} \left(\prod_{j=1}^m \frac{i\sqrt{Z}}{p_j'^2 - m^2 + i\epsilon}\right) \left(\prod_{k=1}^n \frac{i\sqrt{Z}}{p_k^2 - m^2 + i\epsilon}\right) \langle \mathbf{p}_1'\cdots\mathbf{p}_m' \vert S \vert \mathbf{p}_1\cdots\mathbf{p}_n \rangle$$
+```math
+\prod_{j=1}^m \int d^4y_j \, e^{ip_j'\cdot y_j} \prod_{k=1}^n \int d^4x_k \, e^{-ip_k\cdot x_k} \langle \Omega \vert T\{\phi(y_1)\cdots\phi(y_m)\phi(x_1)\cdots\phi(x_n)\} \vert \Omega \rangle \xrightarrow{p_k^2 \to m^2, \, p_j'^2 \to m^2} \left(\prod_{j=1}^m \frac{i\sqrt{Z}}{p_j'^2 - m^2 + i\epsilon}\right) \left(\prod_{k=1}^n \frac{i\sqrt{Z}}{p_k^2 - m^2 + i\epsilon}\right) \langle \mathbf{p}_1'\cdots\mathbf{p}_m' \vert S \vert \mathbf{p}_1\cdots\mathbf{p}_n \rangle
+```
 
-Thus, $S$-matrix elements are obtained by computing connected correlation functions, **amputating** the external propagators $\frac{i}{p^2 - m^2 + i\epsilon}$, multiplying by $Z^{-1/2}$ per external leg, and putting external momenta on-shell ($p^2 = m^2$). (For external Dirac fermions, $(\Box + m^2)$ is replaced by $(-i\not{\partial} + m)$ contracted with $\bar{u}^s(p), v^s(p)$ for outgoing legs and $(i\not{\partial} + m)$ contracted with $u^s(p), \bar{v}^s(p)$ for incoming legs, with $Z_2^{-1/2}$ per fermion leg, P&S §7.2.)
+Thus, $`S`$-matrix elements are obtained by computing connected correlation functions, **amputating** the external propagators $`\frac{i}{p^2 - m^2 + i\epsilon}`$, multiplying by $`Z^{-1/2}`$ per external leg, and putting external momenta on-shell ($`p^2 = m^2`$). (For external Dirac fermions, $`(\Box + m^2)`$ is replaced by $`(-i\not{\partial} + m)`$ contracted with $`\bar{u}^s(p), v^s(p)`$ for outgoing legs and $`(i\not{\partial} + m)`$ contracted with $`u^s(p), \bar{v}^s(p)`$ for incoming legs, with $`Z_2^{-1/2}`$ per fermion leg, P&S §7.2.)
 
 ---
 
@@ -298,77 +376,102 @@ Thus, $S$-matrix elements are obtained by computing connected correlation functi
 
 ### 8.1 Superficial Degree of Divergence & Power Counting (P&S §10.1, §4.1)
 
-In $d$ spacetime dimensions, a diagram with $L$ loops, $I_B$ internal bosonic lines, and $I_F$ internal fermionic lines has **superficial degree of divergence**:
+In $`d`$ spacetime dimensions, a diagram with $`L`$ loops, $`I_B`$ internal bosonic lines, and $`I_F`$ internal fermionic lines has **superficial degree of divergence**:
 
-$$D = dL - 2I_B - I_F$$
+```math
+D = dL - 2I_B - I_F
+```
 
-By topological identities ($L = I_B + I_F - V + 1$) and mass-dimension analysis ($[\mathcal{L}] = d \implies [\phi] = \frac{d-2}{2}, [\psi] = \frac{d-1}{2}, [A_\mu] = \frac{d-2}{2}$), $D$ can be rewritten in terms of external legs ($E_B, E_F$) and vertex coupling dimensions $[g_i]$ (P&S Eq. 10.11):
+By topological identities ($`L = I_B + I_F - V + 1`$) and mass-dimension analysis ($`[\mathcal{L}] = d \implies [\phi] = \frac{d-2}{2}, [\psi] = \frac{d-1}{2}, [A_\mu] = \frac{d-2}{2}`$), $`D`$ can be rewritten in terms of external legs ($`E_B, E_F`$) and vertex coupling dimensions $`[g_i]`$ (P&S Eq. 10.11):
 
-$$D = d - \left(\frac{d-2}{2}\right)E_B - \left(\frac{d-1}{2}\right)E_F - \sum_i n_i [g_i]$$
+```math
+D = d - \left(\frac{d-2}{2}\right)E_B - \left(\frac{d-1}{2}\right)E_F - \sum_i n_i [g_i]
+```
 
-- **Super-renormalizable ($[g_i] > 0$, e.g., $\phi^4$ in $d < 4$ or $\mu\phi^3$ in $d = 4$):** $D$ decreases with vertex count $n_i$; only finitely many diagrams diverge.
+- **Super-renormalizable ($`[g_i] > 0`$, e.g., $`\phi^4`$ in $`d < 4`$ or $`\mu\phi^3`$ in $`d = 4`$):** $`D`$ decreases with vertex count $`n_i`$; only finitely many diagrams diverge.
 
-- **Renormalizable ($[g_i] = 0$, e.g., $\lambda\phi^4$, Yukawa $g\bar{\psi}\psi\phi$, QED $e\bar{\psi}\gamma^\mu\psi A_\mu$ in $d = 4$):** $D = 4 - E_B - \frac{3}{2}E_F$ is independent of loop order; only amplitudes with $D \ge 0$ diverge, and all infinities are absorbed into finitely many counterterms.
+- **Renormalizable ($`[g_i] = 0`$, e.g., $`\lambda\phi^4`$, Yukawa $`g\bar{\psi}\psi\phi`$, QED $`e\bar{\psi}\gamma^\mu\psi A_\mu`$ in $`d = 4`$):** $`D = 4 - E_B - \frac{3}{2}E_F`$ is independent of loop order; only amplitudes with $`D \ge 0`$ diverge, and all infinities are absorbed into finitely many counterterms.
 
-- **Non-renormalizable ($[g_i] < 0$, e.g., $\phi^4$ in $d > 4$ or $\phi^n$ with $n \ge 5$ in $d = 4$):** $D$ grows without bound at higher loops, requiring infinitely many counterterms.
+- **Non-renormalizable ($`[g_i] < 0`$, e.g., $`\phi^4`$ in $`d > 4`$ or $`\phi^n`$ with $`n \ge 5`$ in $`d = 4`$):** $`D`$ grows without bound at higher loops, requiring infinitely many counterterms.
 
-### 8.2 Dimensional Regularization ($d = 4 - \epsilon$) & Master Loop Integrals (P&S §7.5, Appendix A.4)
+### 8.2 Dimensional Regularization ($`d = 4 - \epsilon`$) & Master Loop Integrals (P&S §7.5, Appendix A.4)
 
-Continue to $d = 4 - \epsilon$ dimensions and rescale the coupling $\lambda \to \lambda \mu^\epsilon$ (with arbitrary renormalization scale $\mu$ of mass dimension 1) so $\lambda$ stays dimensionless. Performing a Wick rotation $k^0 = i k_E^0$ ($d^dk = i d^dk_E$, $k^2 = -k_E^2$) and using the $d$-dimensional hypersphere surface area $\int d\Omega_d = \frac{2\pi^{d/2}}{\Gamma(d/2)}$ gives P&S's master Minkowski loop integrals (P&S Eqs. A.44–A.46):
+Continue to $`d = 4 - \epsilon`$ dimensions and rescale the coupling $`\lambda \to \lambda \mu^\epsilon`$ (with arbitrary renormalization scale $`\mu`$ of mass dimension 1) so $`\lambda`$ stays dimensionless. Performing a Wick rotation $`k^0 = i k_E^0`$ ($`d^dk = i d^dk_E`$, $`k^2 = -k_E^2`$) and using the $`d`$-dimensional hypersphere surface area $`\int d\Omega_d = \frac{2\pi^{d/2}}{\Gamma(d/2)}`$ gives P&S's master Minkowski loop integrals (P&S Eqs. A.44–A.46):
 
-$$\int \frac{d^dk}{(2\pi)^d} \frac{1}{(k^2 - \Delta + i\epsilon)^n} = \frac{i(-1)^n}{(4\pi)^{d/2}} \frac{\Gamma\left(n - \frac{d}{2}\right)}{\Gamma(n)} \left(\frac{1}{\Delta}\right)^{n - d/2}$$
+```math
+\int \frac{d^dk}{(2\pi)^d} \frac{1}{(k^2 - \Delta + i\epsilon)^n} = \frac{i(-1)^n}{(4\pi)^{d/2}} \frac{\Gamma\left(n - \frac{d}{2}\right)}{\Gamma(n)} \left(\frac{1}{\Delta}\right)^{n - d/2}
+```
 
-$$\int \frac{d^dk}{(2\pi)^d} \frac{k^2}{(k^2 - \Delta + i\epsilon)^n} = \frac{i(-1)^{n-1}}{(4\pi)^{d/2}} \frac{d}{2} \frac{\Gamma\left(n - \frac{d}{2} - 1\right)}{\Gamma(n)} \left(\frac{1}{\Delta}\right)^{n - d/2 - 1}$$
+```math
+\int \frac{d^dk}{(2\pi)^d} \frac{k^2}{(k^2 - \Delta + i\epsilon)^n} = \frac{i(-1)^{n-1}}{(4\pi)^{d/2}} \frac{d}{2} \frac{\Gamma\left(n - \frac{d}{2} - 1\right)}{\Gamma(n)} \left(\frac{1}{\Delta}\right)^{n - d/2 - 1}
+```
 
-For $\epsilon = 4 - d \to 0$, use $\Gamma(\frac{\epsilon}{2}) = \frac{2}{\epsilon} - \gamma_E + O(\epsilon)$ and $\Gamma(-1 + \frac{\epsilon}{2}) = -\frac{2}{\epsilon} - 1 + \gamma_E + O(\epsilon)$, where $\gamma_E \approx 0.5772$.
+For $`\epsilon = 4 - d \to 0`$, use $`\Gamma(\frac{\epsilon}{2}) = \frac{2}{\epsilon} - \gamma_E + O(\epsilon)`$ and $`\Gamma(-1 + \frac{\epsilon}{2}) = -\frac{2}{\epsilon} - 1 + \gamma_E + O(\epsilon)`$, where $`\gamma_E \approx 0.5772`$.
 
-### 8.3 Explicit One-Loop $\phi^4$ Calculation & Counterterm Renormalization (P&S §10.2)
+### 8.3 Explicit One-Loop $`\phi^4`$ Calculation & Counterterm Renormalization (P&S §10.2)
 
-In **renormalized perturbation theory**, split bare fields and parameters ($\phi_0 = Z^{1/2}\phi$) into renormalized quantities plus counterterms: $\mathcal{L}_{\text{bare}} = \mathcal{L} + \delta\mathcal{L}$:
+In **renormalized perturbation theory**, split bare fields and parameters ($`\phi_0 = Z^{1/2}\phi`$) into renormalized quantities plus counterterms: $`\mathcal{L}_{\text{bare}} = \mathcal{L} + \delta\mathcal{L}`$:
 
-$$\mathcal{L} + \delta\mathcal{L} = \frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2 - \frac{\lambda\mu^\epsilon}{4!}\phi^4 + \frac{1}{2}\delta Z(\partial_\mu\phi)^2 - \frac{1}{2}\delta m^2\phi^2 - \frac{\delta\lambda\,\mu^\epsilon}{4!}\phi^4$$
+```math
+\mathcal{L} + \delta\mathcal{L} = \frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2 - \frac{\lambda\mu^\epsilon}{4!}\phi^4 + \frac{1}{2}\delta Z(\partial_\mu\phi)^2 - \frac{1}{2}\delta m^2\phi^2 - \frac{\delta\lambda\,\mu^\epsilon}{4!}\phi^4
+```
 
-This adds two counterterm Feynman rules: a 2-point cross vertex $i(p^2\delta Z - \delta m^2)$ and a 4-point cross vertex $-i\delta\lambda\,\mu^\epsilon$.
+This adds two counterterm Feynman rules: a 2-point cross vertex $`i(p^2\delta Z - \delta m^2)`$ and a 4-point cross vertex $`-i\delta\lambda\,\mu^\epsilon`$.
 
-1. **One-Loop 2-Point Function ($\Gamma^{(2)}(p) = p^2 - m^2 - \Sigma(p^2)$):**
-   Evaluating the tadpole ($n = 1, \Delta = m^2$) plus counterterm:
+1. **One-Loop 2-Point Function ($`\Gamma^{(2)}(p) = p^2 - m^2 - \Sigma(p^2)`$):**
+   Evaluating the tadpole ($`n = 1, \Delta = m^2`$) plus counterterm:
 
-   $$-i\Sigma(p^2) = -\frac{i\lambda\mu^\epsilon}{2}\int \frac{d^dk}{(2\pi)^d}\frac{i}{k^2 - m^2 + i\epsilon} + i(p^2\delta Z - \delta m^2) = -\frac{i\lambda m^2}{32\pi^2}\left(\frac{4\pi\mu^2}{m^2}\right)^{\epsilon/2}\Gamma\left(-1 + \frac{\epsilon}{2}\right) + i(p^2\delta Z - \delta m^2)$$
+   ```math
+   -i\Sigma(p^2) = -\frac{i\lambda\mu^\epsilon}{2}\int \frac{d^dk}{(2\pi)^d}\frac{i}{k^2 - m^2 + i\epsilon} + i(p^2\delta Z - \delta m^2) = -\frac{i\lambda m^2}{32\pi^2}\left(\frac{4\pi\mu^2}{m^2}\right)^{\epsilon/2}\Gamma\left(-1 + \frac{\epsilon}{2}\right) + i(p^2\delta Z - \delta m^2)
+   ```
 
-   Expanding in $\epsilon$:
+   Expanding in $`\epsilon`$:
 
-   $$\Sigma(p^2) = \frac{\lambda m^2}{16\pi^2\epsilon} + \frac{\lambda m^2}{32\pi^2}\left(1 - \gamma_E + \ln\frac{4\pi\mu^2}{m^2}\right) - p^2\delta Z + \delta m^2 + O(\epsilon)$$
+   ```math
+   \Sigma(p^2) = \frac{\lambda m^2}{16\pi^2\epsilon} + \frac{\lambda m^2}{32\pi^2}\left(1 - \gamma_E + \ln\frac{4\pi\mu^2}{m^2}\right) - p^2\delta Z + \delta m^2 + O(\epsilon)
+   ```
 
-   (Correction: Note Pages 53 & 57–58 misplace a sign on the $1/\epsilon$ pole; because $\Gamma(-1+\epsilon/2) \approx -2/\epsilon$ and the prefactor is $-\frac{\lambda m^2}{32\pi^2}$, the UV pole in $\Sigma$ is **$+\frac{\lambda m^2}{16\pi^2\epsilon}$**, cancelled by $\delta m^2 = -\frac{\lambda m^2}{16\pi^2\epsilon}$ in Minimal Subtraction.) Because $\Sigma$ is independent of $p^2$ at 1-loop, $\delta Z = 0$ at $O(\lambda)$ (non-zero starting at $O(\lambda^2)$ from the sunset diagram).
+   (Correction: Note Pages 53 & 57–58 misplace a sign on the $`1/\epsilon`$ pole; because $`\Gamma(-1+\epsilon/2) \approx -2/\epsilon`$ and the prefactor is $`-\frac{\lambda m^2}{32\pi^2}`$, the UV pole in $`\Sigma`$ is **$`+\frac{\lambda m^2}{16\pi^2\epsilon}`$**, cancelled by $`\delta m^2 = -\frac{\lambda m^2}{16\pi^2\epsilon}`$ in Minimal Subtraction.) Because $`\Sigma`$ is independent of $`p^2`$ at 1-loop, $`\delta Z = 0`$ at $`O(\lambda)`$ (non-zero starting at $`O(\lambda^2)`$ from the sunset diagram).
 
-2. **One-Loop 4-Point Vertex ($\Gamma^{(4)}(p_1,p_2,p_3,p_4)$):**
-   Combining the $s$-, $t$-, and $u$-channel 1-loop fish diagrams ($s = (p_1+p_2)^2$, $t = (p_1-p_3)^2$, $u = (p_1-p_4)^2$) using the Feynman parameter identity $\frac{1}{AB} = \int_0^1 \frac{dz}{[Az + B(1-z)]^2}$:
+2. **One-Loop 4-Point Vertex ($`\Gamma^{(4)}(p_1,p_2,p_3,p_4)`$):**
+   Combining the $`s`$-, $`t`$-, and $`u`$-channel 1-loop fish diagrams ($`s = (p_1+p_2)^2`$, $`t = (p_1-p_3)^2`$, $`u = (p_1-p_4)^2`$) using the Feynman parameter identity $`\frac{1}{AB} = \int_0^1 \frac{dz}{[Az + B(1-z)]^2}`$:
 
-   $$-i\Gamma^{(4)} = -i\lambda\mu^\epsilon + (-i\lambda\mu^\epsilon)^2\big[iV(s) + iV(t) + iV(u)\big] - i\delta\lambda\,\mu^\epsilon$$
+   ```math
+   -i\Gamma^{(4)} = -i\lambda\mu^\epsilon + (-i\lambda\mu^\epsilon)^2\big[iV(s) + iV(t) + iV(u)\big] - i\delta\lambda\,\mu^\epsilon
+   ```
 
-   where each channel integral ($n = 2, \Delta_s = m^2 - sz(1-z)$) evaluates to:
+   where each channel integral ($`n = 2, \Delta_s = m^2 - sz(1-z)`$) evaluates to:
 
-   $$iV(s) = \frac{1}{2}\int_0^1 dz \int \frac{d^dq'}{(2\pi)^d} \frac{1}{[q'^2 - (m^2 - sz(1-z)) + i\epsilon]^2} = \frac{i}{32\pi^2}\left[\frac{2}{\epsilon} - \gamma_E + \ln(4\pi) - \int_0^1 dz \ln\left(\frac{m^2 - sz(1-z)}{\mu^2}\right)\right]$$
+   ```math
+   iV(s) = \frac{1}{2}\int_0^1 dz \int \frac{d^dq'}{(2\pi)^d} \frac{1}{[q'^2 - (m^2 - sz(1-z)) + i\epsilon]^2} = \frac{i}{32\pi^2}\left[\frac{2}{\epsilon} - \gamma_E + \ln(4\pi) - \int_0^1 dz \ln\left(\frac{m^2 - sz(1-z)}{\mu^2}\right)\right]
+   ```
 
-   Summing the three channels yields a pole $-\frac{3i\lambda^2\mu^\epsilon}{16\pi^2\epsilon}$, cancelled by choosing:
+   Summing the three channels yields a pole $`-\frac{3i\lambda^2\mu^\epsilon}{16\pi^2\epsilon}`$, cancelled by choosing:
 
-   $$\delta\lambda = -\frac{3\lambda^2}{16\pi^2\epsilon} \quad (\text{MS scheme}), \qquad \text{or} \quad \delta\lambda = -\frac{3\lambda^2}{16\pi^2}\left(\frac{1}{\epsilon} - \frac{\gamma_E}{2} + \frac{\ln 4\pi}{2}\right) \quad (\overline{\text{MS}}\text{ scheme})$$
+   ```math
+   \delta\lambda = -\frac{3\lambda^2}{16\pi^2\epsilon} \quad (\text{MS scheme}), \qquad \text{or} \quad \delta\lambda = -\frac{3\lambda^2}{16\pi^2}\left(\frac{1}{\epsilon} - \frac{\gamma_E}{2} + \frac{\ln 4\pi}{2}\right) \quad (\overline{\text{MS}}\text{ scheme})
+   ```
 
-   (Alternatively, P&S §10.2 imposes **on-shell renormalization conditions** at $s = 4m^2, t = u = 0$, fixing finite parts directly to physical scattering observables rather than subtracting pure poles.)
+   (Alternatively, P&S §10.2 imposes **on-shell renormalization conditions** at $`s = 4m^2, t = u = 0`$, fixing finite parts directly to physical scattering observables rather than subtracting pure poles.)
 
 ### 8.4 Callan–Symanzik Equation & Running Couplings (P&S §12.2–12.3)
 
-Since bare Green's functions $G_0^{(n)} = Z^{-n/2} G^{(n)}$ are independent of the unphysical renormalization scale $\mu$, differentiating with respect to $\mu$ yields the **Callan–Symanzik equation** (P&S Eq. 12.41):
+Since bare Green's functions $`G_0^{(n)} = Z^{-n/2} G^{(n)}`$ are independent of the unphysical renormalization scale $`\mu`$, differentiating with respect to $`\mu`$ yields the **Callan–Symanzik equation** (P&S Eq. 12.41):
 
-$$\left[\mu\frac{\partial}{\partial\mu} + \beta(\lambda)\frac{\partial}{\partial\lambda} + n\gamma(\lambda)\right] G^{(n)}(x_1,\dots,x_n; \mu, \lambda) = 0$$
-
-where $\beta(\lambda) \equiv \mu\frac{\partial\lambda}{\partial\mu}$ is the **$\beta$-function** and $\gamma(\lambda) \equiv \frac{1}{2}\mu\frac{\partial \ln Z}{\partial\mu}$ is the **anomalous dimension**. From $\lambda_0 = \mu^\epsilon(\lambda + \delta\lambda)$ with $\frac{d\lambda_0}{d\mu} = 0$ at 1-loop ($\delta\lambda = -\frac{3\lambda^2}{16\pi^2\epsilon}$):
-
-$$0 = \epsilon\mu^\epsilon\left(\lambda - \frac{3\lambda^2}{16\pi^2\epsilon}\right) + \mu^\epsilon\left(1 - \frac{3\lambda}{8\pi^2\epsilon}\right)\mu\frac{d\lambda}{d\mu} \xrightarrow{\epsilon \to 0} \beta(\lambda) = +\frac{3\lambda^2}{16\pi^2}$$
-
-Integrating $\frac{d\lambda}{\beta(\lambda)} = d\ln(\mu/\mu_0)$ gives the running $\phi^4$ coupling, and an analogous 1-loop photon vacuum polarization calculation in QED (P&S §7.5, §12.3) gives the running fine-structure constant $\alpha(Q^2) = \frac{e^2(Q^2)}{4\pi}$:
-
-$$\lambda(\mu) = \frac{\lambda(\mu_0)}{1 - \frac{3\lambda(\mu_0)}{16\pi^2}\ln(\mu/\mu_0)}, \qquad \alpha(Q^2) = \frac{\alpha(\mu^2)}{1 - \frac{\alpha(\mu^2)}{3\pi}\ln(Q^2/\mu^2)}$$
-
-Because $\beta > 0$ in both $\phi^4$ theory and QED, interactions weaken at low momentum (infrared-free) due to vacuum polarization screening and grow toward a UV **Landau pole**—opposite to non-Abelian Yang–Mills theories (QCD, P&S §16.5–16.7), where antiscreening from gluon self-interactions yields $\beta(g_s) < 0$ and **asymptotic freedom** at high energies.
+```math
+\left[\mu\frac{\partial}{\partial\mu} + \beta(\lambda)\frac{\partial}{\partial\lambda} + n\gamma(\lambda)\right] G^{(n)}(x_1,\dots,x_n; \mu, \lambda) = 0
 ```
+
+where $`\beta(\lambda) \equiv \mu\frac{\partial\lambda}{\partial\mu}`$ is the **$`\beta`$-function** and $`\gamma(\lambda) \equiv \frac{1}{2}\mu\frac{\partial \ln Z}{\partial\mu}`$ is the **anomalous dimension**. From $`\lambda_0 = \mu^\epsilon(\lambda + \delta\lambda)`$ with $`\frac{d\lambda_0}{d\mu} = 0`$ at 1-loop ($`\delta\lambda = -\frac{3\lambda^2}{16\pi^2\epsilon}`$):
+
+```math
+0 = \epsilon\mu^\epsilon\left(\lambda - \frac{3\lambda^2}{16\pi^2\epsilon}\right) + \mu^\epsilon\left(1 - \frac{3\lambda}{8\pi^2\epsilon}\right)\mu\frac{d\lambda}{d\mu} \xrightarrow{\epsilon \to 0} \beta(\lambda) = +\frac{3\lambda^2}{16\pi^2}
+```
+
+Integrating $`\frac{d\lambda}{\beta(\lambda)} = d\ln(\mu/\mu_0)`$ gives the running $`\phi^4`$ coupling, and an analogous 1-loop photon vacuum polarization calculation in QED (P&S §7.5, §12.3) gives the running fine-structure constant $`\alpha(Q^2) = \frac{e^2(Q^2)}{4\pi}`$:
+
+```math
+\lambda(\mu) = \frac{\lambda(\mu_0)}{1 - \frac{3\lambda(\mu_0)}{16\pi^2}\ln(\mu/\mu_0)}, \qquad \alpha(Q^2) = \frac{\alpha(\mu^2)}{1 - \frac{\alpha(\mu^2)}{3\pi}\ln(Q^2/\mu^2)}
+```
+
+Because $`\beta > 0`$ in both $`\phi^4`$ theory and QED, interactions weaken at low momentum (infrared-free) due to vacuum polarization screening and grow toward a UV **Landau pole**—opposite to non-Abelian Yang–Mills theories (QCD, P&S §16.5–16.7), where antiscreening from gluon self-interactions yields $`\beta(g_s) < 0`$ and **asymptotic freedom** at high energies.
